@@ -1,23 +1,66 @@
-import logo from './logo.svg';
 import './App.css';
+import Main from './Components/Main';
+import { useState } from 'react';
 
 function App() {
+  const [list, setList] = useState(["1", "2", "3",
+                                    "4", "5", "6",
+                                    "7", "8", "9"]);
+  const [win, setWin] = useState("");
+  const [flag, setFlag] = useState(0);
+
+
+  const check = () =>{
+    if(list[0]===list[1] && list[1]===list[2] && (list[0]==="X" || list[0]==="O"))
+    {
+        setWin(list[0])
+    }
+    else if(list[3]===list[4] && list[3]===list[5] && (list[3]==="X" || list[3]==="O"))
+    {
+      setWin(list[3])
+    }
+    else if(list[6]===list[7] && list[6]===list[8] && (list[6]==="X" || list[6]==="O"))
+    {
+      setWin(list[6])
+    }
+    else if(list[0]===list[3] && list[0]===list[6] && (list[0]==="X" || list[0]==="O"))
+    {
+      setWin(list[0])
+    }
+    else if(list[1]===list[4] && list[1]===list[7] && (list[1]==="X" || list[1]==="O"))
+    {
+      setWin(list[1])
+    }
+    else if(list[2]===list[5] && list[8]===list[5] && (list[2]==="X" || list[2]==="O"))
+    {
+      setWin(list[2])
+    }
+    else if(list[0]===list[4] && list[4]===list[8] && (list[0]==="X" || list[0]==="O"))
+    {
+      setWin(list[0])
+    }
+    else if(list[2]===list[4] && list[4]===list[6] && (list[2]==="X" || list[2]==="O"))
+    {
+      setWin(list[2])
+    }
+  }
+  
+  const put = (updated) =>{
+    setList(updated)
+    console.log(list)
+    setFlag(flag+1);
+    check();
+  }
+
+  const refresh = () =>{
+    window.location.reload();
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tic-Tac-Toe</h1>
+      <Main put={put}/>
+      {win?<h1>Player {win} Wins.</h1>:(flag===9?<h1>No Winner!</h1>:"")}
+      <button onClick={refresh}>Restart</button>
     </div>
   );
 }

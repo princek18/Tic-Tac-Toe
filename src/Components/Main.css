@@ -1,0 +1,12 @@
+.column{
+    border: 1px solid black;
+    height: 80px;
+    width: 80px;
+}
+.out{
+    display: flex;
+    width: 240px;
+    height: 240px;
+    flex-wrap: wrap;
+    margin: auto;
+}
