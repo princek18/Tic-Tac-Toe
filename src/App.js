@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <h1>Tic-Tac-Toe</h1>
-      <Main put={put}/>
+      <Main put={put} win={win}/>
       {win?<h1>Player {win} Wins.</h1>:(flag===9?<h1>No Winner!</h1>:"")}
       <button onClick={refresh}>Restart</button>
     </div>

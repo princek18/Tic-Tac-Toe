@@ -2,8 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import './Main.css'
 
-export default function Main({put}) {
+export default function Main({put, win}) {
     const [state, setState] = useState("O");
+    const [flag, setFlag] = useState(0);
     const [dummy, setDummy] = useState(["1", "2", "3",
                                         "4", "5", "6",
                                         "7", "8", "9"]);
@@ -16,6 +17,7 @@ export default function Main({put}) {
             dummy[i] = "X";
             setDummy(dummy);
             setState("X");
+            setFlag(flag+1);
             put(dummy);   
         }
         else if(state==="X")
@@ -24,6 +26,7 @@ export default function Main({put}) {
             dummy[i] = "O";
             setDummy(dummy);
             setState("O");
+            setFlag(flag+1);
             put(dummy);   
         }
     }
@@ -40,7 +43,7 @@ export default function Main({put}) {
             <button value="8" onClick={(e)=>{Handle(e.target.value)}} className="column">{dummy[7]}</button>
             <button value="9" onClick={(e)=>{Handle(e.target.value)}} className="column">{dummy[8]}</button>
         </div>
-        <h1>Player: {state==="O"? "X" : "O"}</h1>
+        {flag===9 || win?<h1>Game Over</h1>:<h1>Player: {(state==="O"? "X" : "O")} Turn</h1>}
         </>
     )
 }
