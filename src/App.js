@@ -1,5 +1,6 @@
 import './App.css';
 import Main from './Components/Main';
+import Player from './Components/Player';
 import { useState } from 'react';
 
 function App() {
@@ -8,6 +9,9 @@ function App() {
                                     "7", "8", "9"]);
   const [win, setWin] = useState("");
   const [flag, setFlag] = useState(0);
+  const [player1, setPlayer1] = useState("");
+  const [player2, setPlayer2] = useState("");
+  const ob = {"X" : player1, "O":player2};
 
 
   const check = () =>{
@@ -55,12 +59,13 @@ function App() {
   const refresh = () =>{
     window.location.reload();
   }
+
   return (
     <div className="App">
       <h1>Tic-Tac-Toe</h1>
-      <Main put={put} win={win}/>
-      {win?<h1>Player {win} Wins.</h1>:(flag===9?<h1>No Winner!</h1>:"")}
-      <button onClick={refresh}>Restart</button>
+      {player1 && player2?<Main put={put} win={win} player1={player1} player2={player2}/>:<Player setPlayer1={setPlayer1} setPlayer2={setPlayer2}/>}
+      {win?<h1>{ob[win]} Wins.</h1>:(flag>=9?<h1>No Winner!</h1>:"")}
+      {player1 && player2?<button onClick={refresh}>Restart</button>:""}
     </div>
   );
 }
